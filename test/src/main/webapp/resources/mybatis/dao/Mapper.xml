@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.dao.Mapper">
+    <resultMap type="mybatis.model.Person" id="Person">
+        <id column="ID" property="id"/>
+        <result property="NAME" column="name"/>
+        <result property="PHONE" column="phone"/>
+        <result property="EMAIL" column="email"/>
+    </resultMap>
+
+    <select id="getAllPerson" resultType="mybatis.model.Person">
+        SELECT *
+        FROM test.person
+    </select>
+
+    <insert id="createPerson" parameterType="mybatis.model.Person">
+        INSERT INTO test.person
+        (name, phone, email)
+        VALUES (#{name}, #{phone}, #{email})
+    </insert>
+
+    <delete id="deletePerson">
+        DELETE FROM test.person
+        WHERE id = #{id}
+    </delete>
+
+    <update id="updatePerson" parameterType="mybatis.model.Person">
+        UPDATE test.person
+        SET
+            name  = #{name},
+            phone = #{phone},
+            email = #{email}
+        WHERE id = #{id}
+    </update>
+</mapper>
